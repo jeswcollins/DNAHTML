@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<body>
+<form id="seq">
+	DNA sequence: <input type="text" name="DNAseq" value=""><br>
+</form>
+<button onclick="complement()">Show complement</button>
+<p id="out"></p>
+<ul id="seqList">
+</ul>
+<script type="text/javascript">
+COMPLEMENT_BASES={'A':'T','T':'A','G':'C','C':'G'};
+function complement() {
+	var s=document.getElementById("seq").elements[0].value;
+	var allButFourBaseRE=/[^CGATcgat]/;//.test(s) should return true if s contains a character that is not a C, G, A, T, c, g, a, or t.
+	if (s.length == 0 || allButFourBaseRE.test(s)) {
+		alert("This program only works on DNA sequences composed only from the following eight characters: C, G, A, T, c, g, a, or t");
+	} else {
+		var reverseSeq=s.split('').reverse().join('');
+		var complementSeq='';
+		for (i in reverseSeq){complementSeq=complementSeq+COMPLEMENT_BASES[reverseSeq[i]]};
+    	var list = document.getElementById("seqList");
+    	list.appendChild(document.createElement('li')).appendChild(document.createTextNode(s+' -> '+complementSeq));
+    };
+}
+</script>
+
+</body>

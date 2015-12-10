@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<body>
+<form id="prefix">
+	Prefix before barcode: <input type="text" name="prefix" value=""><br>
+</form>
+<form id="suffix">
+     Suffix after barcode: <input type="text" name="suffix" value=""><br>
+</form>
+<form id="barcodes">
+	List of barcodes: <input type="text" name="barcodes" value=""><br>
+</form>
+<button onclick="listSequences()">List barcoded sequences</button>
+<p id="out"></p>
+<ul id="seqList">
+</ul>
+<script type="text/javascript">
+//var s='GGCGCTGAGTACGGGCTACCTGCCG';
+function listSequences() {
+	var pre=document.getElementById("prefix").elements[0].value;
+	var suf=document.getElementById("suffix").elements[0].value;
+	var barcodes=document.getElementById("barcodes").elements[0].value.split(/[,;\s+]/);
+	var barcodedList = document.getElementById("seqList");
+	for (i in barcodes){
+    barcodedList.appendChild(document.createElement('li')).appendChild(document.createTextNode(pre+barcodes[i]+suf));
+	}
+}
+</script>
+
+</body>

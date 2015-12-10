@@ -10,3 +10,4 @@ for (i in MATCH_NN_PARAMS_OBJECTS_NOSTRINGS)
 {
 	document.getElementById('out').innerHTML+='<br>'+i;
 }
+document.getElementById('out').innerHTML+='<br>AA_TT delH: '+MATCH_NN_PARAMS_OBJECTS_NOSTRINGS.AA_TT.H;
