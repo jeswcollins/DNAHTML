@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <body>
+<form id="name">
+	Sequence Name: <input type="text" name="name" value=""><br>
+</form>
+<form id="initial_index">
+	Initial Index: <input type="text" name="initial_index" value=""><br>
+</form>
 <form id="prefix">
 	Prefix before barcode: <input type="text" name="prefix" value=""><br>
 </form>
@@ -9,19 +15,33 @@
 <form id="barcodes">
 	List of barcodes: <input type="text" name="barcodes" value=""><br>
 </form>
-<button onclick="listSequences()">List barcoded sequences</button>
-<p id="out"></p>
-<ul id="seqList">
-</ul>
+<button onclick="showSequences()">Show barcoded sequences</button>
+<table id="seqTable" style="border-collapse:separate; border-spacing:20;">
+</table>
 <script type="text/javascript">
-//var s='GGCGCTGAGTACGGGCTACCTGCCG';
-function listSequences() {
+function showSequences(){
+	var name=document.getElementById("name").elements[0].value;
+	var initialind=document.getElementById("initial_index").elements[0].value;
 	var pre=document.getElementById("prefix").elements[0].value;
 	var suf=document.getElementById("suffix").elements[0].value;
 	var barcodes=document.getElementById("barcodes").elements[0].value.split(/[,;\s+]/);
-	var barcodedList = document.getElementById("seqList");
+	var sequenceTable = document.getElementById("seqTable");
 	for (i in barcodes){
-    barcodedList.appendChild(document.createElement('li')).appendChild(document.createTextNode(pre+barcodes[i]+suf));
+    	//sequenceTable.appendChild(document.createElement('tr')).appendChild(document.createTextNode(name+i+'     '+pre+barcodes[i]+suf));
+    	var row = document.createElement('tr')
+    	var num = parseInt(i)+parseInt(initialind);
+    	row.appendChild(document.createElement('td')).appendChild(document.createTextNode(name+num));
+    	//row.appendChild(document.createElement('td')).appendChild(document.createTextNode('\u00a0 \u00a0 \u00a0 \u00a0 \u00a0'+barcodes[i]+suf));
+
+    	//var preFT=document.createElement('pre').appendChild(document.createTextNode('\u0009'+barcodes[i]+suf));
+    	
+    	//row.appendChild(document.createElement('td')).appendChild(document.createTextNode('\u0009'+barcodes[i]+suf));
+    	var td=document.createElement('td');
+    	td.innerHTML="<pre>&#9"+pre+barcodes[i]+suf+"</pre>";
+    	row.appendChild(td)
+		//&#9 &nbsp
+    	//U+000A
+    	sequenceTable.appendChild(row);
 	}
 }
 </script>
